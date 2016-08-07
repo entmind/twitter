@@ -12,11 +12,11 @@ class TweetsController < ApplicationController
   end
   
   def new
-#    if params[:back]
-#      @tweet = Tweet.new(tweets_params)
-#    else
-#      @tweet = Tweet.new
-#    end
+    if params[:back]
+      @tweet = Tweet.new(tweets_params)
+    else
+      @tweet = Tweet.new
+    end
   end
 
   def confirm
