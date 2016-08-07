@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
+        <p id="notice"><%= notice %></p>
+        <h1>ツイート 一覧</h1>
+            <!-- <%= link_to "ツイートを作成する", new_tweet_path, class: 'btn btn-success btn-block' %> -->
+
+
+            <%= form_for(@tweet, url: choose_new_or_edit) do |f| %>
+                <% if @tweet.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= @tweet.errors.count %>件のエラーがあります。</h2>
+                        
+                        <ul>
+                            <% @tweet.errors.full_messages.each do |msg| %>
+                                <li><%= msg %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+            
+                <!-- <%= f.label :content %> -->
+                <p>▼以下のフォームからツイートしてみようっ<%= f.text_field :content, class: 'form-control' %></p>
+                <br>
+                <%= f.submit "ツイートを投稿する", class: 'btn btn-block btn-success' %>
+            <% end %>
+
+
+
+
+        <% @tweets.reverse_each do |tweet| %>
+            <div class="row">
+                <p>＠名無しさんツイート @nanashi-san <%= tweet.created_at %><br><strong><%= tweet.content %></strong></p>
+                <%= link_to "ツイートを編集する", edit_tweet_path(tweet.id), class: 'btn btn-default btn-sm btn-primary' %>
+                <%= link_to "ツイートを削除する", tweet_path(tweet.id), method: :delete, data: { confirm: '本当に削除してよいですか？' }, class: 'btn btn-default btn-sm btn-danger' %>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<div id="page-top-btn2" class="page-top-btn2">
+    <p><a id="move-page-top" class="move-page-top">▲</a></p>
+</div>

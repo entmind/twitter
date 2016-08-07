@@ -1,0 +1,36 @@
+<!-- 作ったよ -->
+<div class="container">
+    <div class="wrapper col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">    
+        <p id="notice"><%= notice %></p>
+        <h1>ツイート 確認</h1>
+        <h3>以下の内容で作成しますか？</h3>
+        
+        <%= form_for(@tweet) do |f| %>
+            
+            <% if @tweet.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= @tweet.errors.count %>件のエラーがあります。</h2>
+                    <ul>
+                        <%= @tweet.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>                        
+                    
+            <%= f.label :content %>
+            <%= @tweet.content %>
+            <%= f.hidden_field :content %>
+            <br>
+            <%= f.submit "ツイートを投稿する", class: 'btn btn-block btn-md btn-success' %>
+        <% end %>
+    
+        <br><br><br><br>
+        <%= form_for(@tweet, url: new_tweet_path, method: 'get') do |f| %>
+            <%= f.hidden_field :content %>
+            <%= f.submit "ツイート入力画面に戻る(入力しなおす)", name: 'back', class: 'btn btn-default btn-md' %>
+        <% end %>
+
+    </div>    
+
+</div>
